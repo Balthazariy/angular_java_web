@@ -1,13 +1,11 @@
-package spring_introduction;
+package spring_introduction.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring_introduction.departments.ArtDepartment;
-import spring_introduction.departments.ArtDepartmentRepository;
-import spring_introduction.roles.ArtRole;
-import spring_introduction.roles.ArtRoleRepository;
-import spring_introduction.users.ArtUser;
-import spring_introduction.users.ArtUserRepository;
+import spring_introduction.tables.models.ArtDepartment;
+import spring_introduction.tables.interfaces.ArtDepartmentRepository;
+import spring_introduction.tables.models.ArtRole;
+import spring_introduction.tables.interfaces.ArtRoleRepository;
 
 import java.util.ArrayList;
 import java.util.List;

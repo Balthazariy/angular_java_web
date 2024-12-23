@@ -1,10 +1,11 @@
-package spring_introduction;
+package spring_introduction.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spring_introduction.users.ArtUser;
+import spring_introduction.services.LoginService;
+import spring_introduction.tables.models.ArtUser;
 
 @RestController
 @RequestMapping("/api/auth")

@@ -1,4 +1,4 @@
-package spring_introduction.roles;
+package spring_introduction.tables.models;
 
 import jakarta.persistence.*;
 

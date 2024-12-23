@@ -1,4 +1,4 @@
-package spring_introduction.departments;
+package spring_introduction.tables.models;
 
 import jakarta.persistence.*;
 

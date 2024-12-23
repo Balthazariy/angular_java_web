@@ -1,13 +1,11 @@
-package spring_introduction;
+package spring_introduction.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import spring_introduction.roles.ArtRoleRepository;
+import spring_introduction.services.RequestService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

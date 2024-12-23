@@ -1,9 +1,9 @@
-package spring_introduction;
+package spring_introduction.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring_introduction.users.ArtUser;
-import spring_introduction.users.ArtUserRepository;
+import spring_introduction.tables.models.ArtUser;
+import spring_introduction.tables.interfaces.ArtUserRepository;
 
 @Service
 public class LoginService {
