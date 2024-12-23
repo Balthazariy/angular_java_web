@@ -1,0 +1,34 @@
+<main>
+    <div class="container">
+      <form class="formDiv" (ngSubmit)="onSubmit()" #requestForm="ngForm">
+        <h1>Request</h1>
+        <h4>Select role and service</h4>
+  
+        <div class="dropdown">
+          <label for="role-select">Pick a role</label>
+          <select
+            id="role-select"
+            [(ngModel)]="request.role"
+            name="role"
+            required
+            class="form-control"
+          >
+            <option *ngFor="let role of availableRoles" [value]="role">{{ role }}</option>
+          </select>
+        </div>
+
+        <div class="dropdown">
+            <label for="department-select">Pick a department</label>
+            <select
+              id="department-select"
+              [(ngModel)]="request.department"
+              name="department"
+              required
+              class="form-control"
+            >
+              <option *ngFor="let department of availableDeparments" [value]="department">{{ department }}</option>
+            </select>
+          </div>
+      </form>
+    </div>
+  </main>
