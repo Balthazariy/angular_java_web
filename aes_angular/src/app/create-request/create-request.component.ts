@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { RequestService } from '../request.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-create-request',
@@ -13,24 +14,45 @@ import { RequestService } from '../request.service';
     HttpClientModule
   ],
   templateUrl: './create-request.component.html',
-  styleUrl: './create-request.component.css',
+  styleUrls: ['./create-request.component.css'],
   providers: [RequestService]
 })
-export class CreateRequestComponent {
-  availableRoles: string[] = [];
-  availableDeparments: string[] = [];
 
-  request = {
-    role: '',
-    department: ''
+export class CreateRequestComponent {
+  availableRoles: { id: number; name: string; }[] = [];
+  availableServices: { id: number; name: string; }[] = [];
+  availableStatuses: { id: number; name: string; }[] = [];
+
+  filteredRequests: any[] = [];
+  allRequests: any[] = [];
+
+  requestData = {
+    workerId: -1,
+    roleId: -1,
+    serviceId: -1
   }
 
-  constructor(private requestService: RequestService, private router: Router) { }
+  selection = {
+    role: '',
+    service: ''
+  }
 
+  isOwner = false;
+  isAdmin = false;
+
+  filterStatus = '';
+
+  constructor(
+    private requestService: RequestService, 
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
     this.loadRoles();
-    this.loadDepartments();
+    this.loadServices();
+    this.loadRequests();
+    this.loadStatuses();
   }
 
   loadRoles() {
@@ -45,20 +67,75 @@ export class CreateRequestComponent {
     });
   }
 
-  loadDepartments() {
-    this.requestService.getDepartment().subscribe({
+  loadServices() {
+    this.requestService.getServices().subscribe({
       next: (data) => {
-        this.availableDeparments = data;
-        console.log('Departments loaded:', data);
+        this.availableServices = data;
+        console.log('Services loaded:', data);
       },
       error: (err) => {
-        console.error('Error loading departments:', err);
+        console.error('Error loading services:', err);
       }
     });
   }
 
-  onSubmit() {
-    console.log('Request submitted:', this.request);
+  loadRequests() {
+    this.requestService.getRequests().subscribe({
+      next: (data) => {
+        this.allRequests = data;
+        console.log('Requests loaded:', data);
+        this.filterRequests();
+      },
+      error: (err) => {
+        console.error('Error loading requests:', err);
+      }
+    });
+  }
 
+  loadStatuses() {
+    this.requestService.getStatuses().subscribe({
+      next: (data) => {
+        this.availableStatuses = data;
+        console.log('Statuses loaded:', data);
+      },
+      error: (err) => {
+        console.error('Error loading statuses:', err);
+      }
+    });
+  }
+
+  filterRequests() {
+    if (this.filterStatus) {
+      this.filteredRequests = this.allRequests.filter(request => request.status === this.filterStatus);
+    } else {
+      this.filteredRequests = [...this.allRequests];
+    }
+  }
+
+  onSubmit() {
+    this.requestData.workerId = this.userService.getWorkerId()!;
+    this.requestData.roleId = this.availableRoles.find(role => role.name === this.selection.role)!.id;
+    this.requestData.serviceId = this.availableServices.find(service => service.name === this.selection.service)!.id;
+    console.log(this.requestData);
+    this.requestService.createRequest(this.requestData).subscribe({
+      next: (response) => {
+        console.log('Request successfully submitted:', response);
+      },
+      error: (error) => {
+        console.error('Error submitting request:', error);
+      }
+    });
+  }
+
+  approveRequest(request: any) {
+    console.log('Request approved:', request);
+    request.status = '2';
+    this.filterRequests();
+  }
+
+  rejectRequest(request: any) {
+    console.log('Request rejected:', request);
+    request.status = '3';
+    this.filterRequests();
   }
 }

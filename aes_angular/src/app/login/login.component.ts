@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginService } from '../login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -25,21 +26,22 @@ export class LoginComponent {
   isError: boolean = false;
   errorMessage: string = '';
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(
+    private loginService: LoginService, 
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   onSubmit() {
     this.loginService.login(this.loginData.username, this.loginData.password).subscribe(
       (response) => {
+        this.userService.setWorkerId(response.workerId)
         this.router.navigate(['/create_request'])
         this.isError = false;
       },
       (error) => {
         this.isError = true;
         this.errorMessage = error.error;
-
-        setTimeout(() => {
-          this.isError = false;
-        }, 3000);
       }
     );
   }

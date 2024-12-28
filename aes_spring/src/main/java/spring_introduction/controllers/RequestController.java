@@ -1,10 +1,11 @@
 package spring_introduction.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring_introduction.services.RequestService;
+import spring_introduction.tables.models.ArtRequest;
+import spring_introduction.tables.models.ArtWorker;
+import spring_introduction.tables.models.BaseResponse;
 
 import java.util.List;
 
@@ -16,12 +17,28 @@ public class RequestController {
     private RequestService service;
 
     @GetMapping("/roles")
-    public List<String> getAllRoles() {
+    public List<BaseResponse> getAllRoles() {
         return service.getAllRoleNames();
     }
 
-    @GetMapping("/department")
-    public List<String> getAllDepartments() {
-        return service.getAllDepartmentNames();
+    @GetMapping("/service")
+    public List<String> getAllServices() {
+        return service.getAllServiceNames();
+    }
+
+    @GetMapping("/status")
+    public List<String> getAllStatuses() {
+        return service.getAllStatusNames();
+    }
+
+    @GetMapping("/request")
+    public List<ArtRequest> getAllRequests() {
+        return service.getAllRequests();
+    }
+
+    @PostMapping("/create")
+    public ArtRequest createRequest(@RequestBody ArtRequest request) {
+        System.out.println(request);
+        return service.createRequest(request);
     }
 }

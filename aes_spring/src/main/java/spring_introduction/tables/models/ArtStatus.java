@@ -1,12 +1,15 @@
 package spring_introduction.tables.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ART_DEPARTMENT")
-public class ArtDepartment {
+@Table(name = "ART_STATUS")
+public class ArtStatus {
     @Id
-    @Column(name = "DEPARTMENTID")
+    @Column(name = "STATUSID")
     private Long id;
 
     @Column(name = "NAME")
