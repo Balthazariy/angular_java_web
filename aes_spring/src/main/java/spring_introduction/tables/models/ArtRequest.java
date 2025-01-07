@@ -12,13 +12,16 @@ public class ArtRequest {
     private Long id;
 
     @Column(name = "WORKERID")
-    private Long workerID;
+    private Long workerId;
 
     @Column(name = "STATUSID")
-    private  Long statusID;
+    private  Long statusId;
 
     @Column(name = "ROLEID")
-    private Long roleID;
+    private Long roleId;
+
+    @Column(name = "SERVICEID")
+    private Long serviceId;
 
     @Column(name = "REQUESTDATE")
     private Timestamp requestDate;
@@ -29,6 +32,9 @@ public class ArtRequest {
     @Column(name = "REJECTIONREASON")
     private String rejectionReason;
 
+    @Column(name = "FULLNAME")
+    private String fullname;
+
     public Long getId() {
         return id;
     }
@@ -37,28 +43,28 @@ public class ArtRequest {
         this.id = id;
     }
 
-    public Long getWorkerID() {
-        return workerID;
+    public Long getWorkerId() {
+        return workerId;
     }
 
-    public void setWorkerID(Long workerID) {
-        this.workerID = workerID;
+    public void setWorkerId(Long workerId) {
+        this.workerId = workerId;
     }
 
-    public Long getStatusID() {
-        return statusID;
+    public Long getStatusId() {
+        return statusId;
     }
 
-    public void setStatusID(Long statusID) {
-        this.statusID = statusID;
+    public void setStatusId(Long statusId) {
+        this.statusId = statusId;
     }
 
-    public Long getRoleID() {
-        return roleID;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRoleID(Long roleID) {
-        this.roleID = roleID;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public Timestamp getRequestDate() {
@@ -83,5 +89,21 @@ public class ArtRequest {
 
     public void setRejectionReason(String rejectionReason) {
         this.rejectionReason = rejectionReason;
+    }
+
+    public Long getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 }

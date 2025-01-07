@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+
+main {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  main {
+    width: 98%;
+    max-width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  .btn-logout {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .btn-logout:hover {
+    background-color: #e04343;
+  }
+  
+  /* Блок Мої доступи */
+  .myAccess {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .myAccess h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .myAccess p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .access-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .access-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .access-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .access-card p {
+    color: #666;
+  }
+  
+  /* Форма запиту */
+  .container {
+    margin-bottom: 40px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .formDiv {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formDiv h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .formDiv h4 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666;
+    text-align: center;
+  }
+  
+  .dropdown {
+    margin-bottom: 20px;
+  }
+  
+  .dropdown label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .dropdown select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+  
+  .btn-submit {
+    display: block;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 auto;
+  }
+  
+  .btn-submit:hover {
+    background-color: #45a049;
+  }
+  
+  /* Блок Запити */
+  .requestManagement {
+    margin-top: 40px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .requests-section h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .type-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .btn-filter {
+    background-color: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .btn-filter:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .requests-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .requests-table th,
+  .requests-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .requests-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .requests-table td {
+    color: #555;
+  }
+  
+  .btn-approve {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .btn-approve:hover {
+    background-color: #45a049;
+  }
+  
+  .btn-reject {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .btn-reject:hover {
+    background-color: #e53935;
+  }
+  

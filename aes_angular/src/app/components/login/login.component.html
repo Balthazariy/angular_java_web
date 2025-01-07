@@ -1,0 +1,23 @@
+<main>
+    <div class="container">
+        <form class="formDiv" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <h1>Логін</h1>
+
+            <div class="textfield">
+                <label for="user">Користувач</label>
+                <input type="text" name="user" [(ngModel)]="loginData.username" required class="form-control" [ngClass]="{'input-error': isError}" placeholder="Користувач">
+            </div>
+
+            <div class="textfield">
+                <label for="password">Пароль</label>
+                <input type="password" name="password" [(ngModel)]="loginData.password" required class="form-control" [ngClass]="{'input-error': isError}" placeholder="Пароль">
+            </div>
+
+            <div class="error-message" *ngIf="isError">
+                {{ errorMessage }}
+            </div>
+
+            <button type="submit" class="btn-login">Увійти</button>
+        </form>
+    </div>
+</main>

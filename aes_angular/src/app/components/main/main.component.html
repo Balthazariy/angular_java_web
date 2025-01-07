@@ -1,0 +1,116 @@
+<main>
+  <div class="header">
+    <button (click)="logout()" class="btn-logout">Вихід</button>
+  </div>
+
+  <div class="myAccess">
+    <h2>Мої доступи</h2>
+    <p>Поточні доступи до сервісів</p>
+    <div class="access-cards">
+      <div class="access-card" *ngFor="let access of allAccesses">
+        <h3>{{ access.serviceName }}</h3>
+        <p>{{ access.roleName }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <form class="formDiv" (ngSubmit)="onSubmit()" #requestForm="ngForm">
+      <h1>Запит</h1>
+      <h4>Виберіть роль та сервіс</h4>
+
+      <div class="dropdown">
+        <label for="role-select">Виберіть роль</label>
+        <select
+          id="role-select"
+          [(ngModel)]="selection.role"
+          name="role"
+          required
+          class="form-control"
+        >
+          <option *ngFor="let role of availableRoles" [value]="role.name">{{ role.name }}</option>
+        </select>
+      </div>
+
+      <div class="dropdown">
+        <label for="service-select">Виберіть сервіс</label>
+        <select
+          id="service-select"
+          [(ngModel)]="selection.service"
+          name="service"
+          required
+          class="form-control"
+        >
+          <option *ngFor="let service of availableServices" [value]="service.name">{{ service.name }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">Підтвердити</button>
+    </form>
+  </div>
+
+  <div class="requestManagement">
+    <section class="requests-section">
+      <h2>Запити</h2>
+  
+      <div class="type-buttons">
+        <button
+          (click)="showPersonalRequests()"
+          class="btn-filter"
+          [disabled]="!isPersonalEnabled()"
+        >
+          Особисті
+        </button>
+        <button
+          (click)="showAdminRequests()"
+          class="btn-filter"
+          [disabled]="!isAdminEnabled()"
+        >
+          Адміністратора
+        </button>
+        <button
+          (click)="showOwnerRequests()"
+          class="btn-filter"
+          [disabled]="!isOwnerEnabled()"
+        >
+          Власника
+        </button>
+      </div>
+  
+      <table class="requests-table">
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>ПІБ</th>
+            <th>Сервіс</th>
+            <th>Роль</th>
+            <th>Статус</th>
+            <th>Створено</th>
+            <th>Дії</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of filteredRequests">
+            <td>{{ request.filteredId }}</td>
+            <td>{{ request.fullName }}</td>
+            <td>{{ request.serviceName }}</td>
+            <td>{{ request.roleName }}</td>
+            <td>{{ request.statusName }}</td>
+            <td>{{ request.requestDate | date: 'short' }}</td>
+            <td>
+              <ng-container *ngIf="isOwner && request.statusId === 1 && !hideActionButtons">
+                <button (click)="approveRequest(request)" class="btn-approve">Дозволити</button>
+                <button (click)="rejectRequest(request)" class="btn-reject">Заборонити</button>
+              </ng-container>
+              
+              <ng-container *ngIf="isAdmin && request.statusId === 2 && !hideActionButtons">
+                <button (click)="approveRequest(request)" class="btn-approve">Дозволити</button>
+                <button (click)="rejectRequest(request)" class="btn-reject">Заборонити</button>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</main>

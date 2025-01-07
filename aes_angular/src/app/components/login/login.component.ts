@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LoginService } from '../login.service';
+import { LoginService } from '../../services/login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -36,12 +36,13 @@ export class LoginComponent {
     this.loginService.login(this.loginData.username, this.loginData.password).subscribe(
       (response) => {
         this.userService.setWorkerId(response.workerId)
+        this.userService.setUserId(response.userId)
         this.router.navigate(['/create_request'])
         this.isError = false;
       },
       (error) => {
         this.isError = true;
-        this.errorMessage = error.error;
+        this.errorMessage = "Невірний лкористувач чи пароль";
       }
     );
   }

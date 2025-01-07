@@ -20,11 +20,12 @@ public class LoginController {
 
         if (isAuthenticated) {
             Long workerId = loginService.findUser(loginRequest.getUsername()).getWorkerid();
-            LoginResponse response = new LoginResponse("Login successful!", workerId);
+            Long userId = loginService.findUser(loginRequest.getUsername()).getId();
+            LoginResponse response = new LoginResponse("Login successful!", workerId, userId);
 
             return ResponseEntity.ok(response);
         } else {
-            LoginResponse response = new LoginResponse("Invalid username or password", (long)-1);
+            LoginResponse response = new LoginResponse("Invalid username or password", (long)-1, (long)-1);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
