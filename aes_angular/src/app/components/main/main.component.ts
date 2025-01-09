@@ -46,10 +46,12 @@ export class MainComponent {
     service: ''
   }
 
-  isOwner = false;
-  isAdmin = false;
-  isPersonal = true;
-  hideActionButtons = false;
+  isOwner: boolean = false;
+  isAdmin: boolean = false;
+  isPersonal: boolean = true;
+  hideActionButtons: boolean = false;
+  isError: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private requestService: RequestService,
@@ -275,13 +277,18 @@ export class MainComponent {
     this.requestData.roleId = this.availableRoles.find(role => role.name === this.selection.role)!.id;
     this.requestData.serviceId = this.availableServices.find(service => service.name === this.selection.service)!.id;
     this.requestData.fullname = this.userService.getFullNameId()!;
-    if (this.allAccesses.find(x => x.roleId == this.requestData.roleId) || this.allAccesses.find(x => x.serviceId == this.requestData.serviceId)) {
-      console.log('Запит з такою самою роллю чи сервісом вже існує!');
+    this.isError = false;
+    if (this.allAccesses.find(x => x.roleId == this.requestData.roleId) && this.allAccesses.find(x => x.serviceId == this.requestData.serviceId)) {
+      console.log('Запит з такою самою роллю та сервісом вже існує!');
+      this.errorMessage = "У вас вже є доступ"
+      this.isError = true;
       return;
     }
 
-    if (this.allRequests.find(x => x.roleId == this.requestData.roleId) || this.allRequests.find(x => x.serviceId == this.requestData.serviceId)) {
-      console.log('Запит з такою самою роллю чи сервісом вже існує!');
+    if (this.personalRequests.find(x => x.roleId == this.requestData.roleId) && this.personalRequests.find(x => x.serviceId == this.requestData.serviceId)) {
+      console.log('Запит з такою самою роллю та сервісом вже існує!');
+      this.errorMessage = "Запит з такою роллю та сервісом вже існує"
+      this.isError = true;
       return;
     }
     this.requestService.createRequest(this.requestData).subscribe({
